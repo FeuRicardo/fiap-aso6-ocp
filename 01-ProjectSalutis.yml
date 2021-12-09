@@ -1,0 +1,54 @@
+kind: Project
+apiVersion: project.openshift.io/v1
+metadata:
+  name: salutis01
+  selfLink: /apis/project.openshift.io/v1/projects/salutis01
+  uid: 4834c9db-7abc-403f-8150-4a77df79a4ec
+  resourceVersion: '37459549'
+  creationTimestamp: '2021-11-25T23:29:42Z'
+  annotations:
+    openshift.io/description: ''
+    openshift.io/display-name: salutis-01
+    openshift.io/requester: onpbhk
+    openshift.io/sa.scc.mcs: 's0:c81,c5'
+    openshift.io/sa.scc.supplemental-groups: 1006490000/10000
+    openshift.io/sa.scc.uid-range: 1006490000/10000
+  managedFields:
+    - manager: cluster-policy-controller
+      operation: Update
+      apiVersion: v1
+      time: '2021-11-25T23:29:42Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            'f:openshift.io/sa.scc.mcs': {}
+            'f:openshift.io/sa.scc.supplemental-groups': {}
+            'f:openshift.io/sa.scc.uid-range': {}
+    - manager: openshift-apiserver
+      operation: Update
+      apiVersion: v1
+      time: '2021-11-25T23:29:42Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:openshift.io/description': {}
+            'f:openshift.io/display-name': {}
+            'f:openshift.io/requester': {}
+        'f:status':
+          'f:phase': {}
+    - manager: openshift-controller-manager
+      operation: Update
+      apiVersion: v1
+      time: '2021-11-25T23:29:42Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:finalizers': {}
+spec:
+  finalizers:
+    - kubernetes
+status:
+  phase: Active
