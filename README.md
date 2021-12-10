@@ -1,8 +1,10 @@
 # fiap-aso6-ocp
-- 01-ProjectSalutis.yml - Create the project
 
-- 02-App.yml - Create the application
+- **File name:** Project_fiap_blogSolution.yml
+- **Project name:** fiap
+- **Deploy:** 
+  - Blog application 
+  - Postgre database
+  - Horizontal Pod Autoscaler
 
-- 03-Postgresql.yml - Create the persistence  layer
-
-- 04-hpa-salutis.yaml - Define the **Horizontal Pod Autoscaler**
+###### This yaml file was built assuming the **fiap** project already exists.
