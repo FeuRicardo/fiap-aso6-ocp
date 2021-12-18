@@ -1,387 +1,28 @@
-kind: Deployment
-apiVersion: apps/v1
+kind: Secret
+apiVersion: v1
 metadata:
-  annotations:
-    alpha.image.policy.openshift.io/resolve-names: '*'
-    app.openshift.io/vcs-ref: ''
-    app.openshift.io/vcs-uri: 'https://github.com/openshift-katacoda/blog-django-py.git'
-    deployment.kubernetes.io/revision: '2'
-    image.openshift.io/triggers: >-
-      [{"from":{"kind":"ImageStreamTag","name":"blog-django-py:latest","namespace":"fiap"},"fieldPath":"spec.template.spec.containers[?(@.name==\"blog-django-py\")].image","pause":"false"}]
-    openshift.io/generated-by: OpenShiftWebConsole
-  selfLink: /apis/apps/v1/namespaces/fiap/deployments/blog-django-py
-  resourceVersion: '6631556'
-  name: blog-django-py
-  uid: d37dc532-577c-42ed-acab-8a78b785070f
-  creationTimestamp: '2021-12-10T00:57:45Z'
-  generation: 2
-  managedFields:
-    - manager: Mozilla
-      operation: Update
-      apiVersion: apps/v1
-      time: '2021-12-10T00:57:45Z'
-      fieldsType: FieldsV1
-      fieldsV1:
-        'f:metadata':
-          'f:annotations':
-            .: {}
-            'f:alpha.image.policy.openshift.io/resolve-names': {}
-            'f:app.openshift.io/vcs-ref': {}
-            'f:app.openshift.io/vcs-uri': {}
-            'f:image.openshift.io/triggers': {}
-            'f:openshift.io/generated-by': {}
-          'f:labels':
-            .: {}
-            'f:app': {}
-            'f:app.kubernetes.io/component': {}
-            'f:app.kubernetes.io/instance': {}
-            'f:app.kubernetes.io/name': {}
-            'f:app.kubernetes.io/part-of': {}
-            'f:app.openshift.io/runtime': {}
-            'f:app.openshift.io/runtime-version': {}
-        'f:spec':
-          'f:progressDeadlineSeconds': {}
-          'f:replicas': {}
-          'f:revisionHistoryLimit': {}
-          'f:selector':
-            'f:matchLabels':
-              .: {}
-              'f:app': {}
-          'f:strategy':
-            'f:rollingUpdate':
-              .: {}
-              'f:maxSurge': {}
-              'f:maxUnavailable': {}
-            'f:type': {}
-          'f:template':
-            'f:metadata':
-              'f:labels':
-                .: {}
-                'f:app': {}
-                'f:deploymentconfig': {}
-            'f:spec':
-              'f:containers':
-                'k:{"name":"blog-django-py"}':
-                  .: {}
-                  'f:imagePullPolicy': {}
-                  'f:name': {}
-                  'f:ports':
-                    .: {}
-                    'k:{"containerPort":8080,"protocol":"TCP"}':
-                      .: {}
-                      'f:containerPort': {}
-                      'f:protocol': {}
-                  'f:resources': {}
-                  'f:terminationMessagePath': {}
-                  'f:terminationMessagePolicy': {}
-              'f:dnsPolicy': {}
-              'f:restartPolicy': {}
-              'f:schedulerName': {}
-              'f:securityContext': {}
-              'f:terminationGracePeriodSeconds': {}
-    - manager: openshift-controller-manager
-      operation: Update
-      apiVersion: apps/v1
-      time: '2021-12-10T00:59:01Z'
-      fieldsType: FieldsV1
-      fieldsV1:
-        'f:spec':
-          'f:template':
-            'f:spec':
-              'f:containers':
-                'k:{"name":"blog-django-py"}':
-                  'f:image': {}
-    - manager: kube-controller-manager
-      operation: Update
-      apiVersion: apps/v1
-      time: '2021-12-10T00:59:07Z'
-      fieldsType: FieldsV1
-      fieldsV1:
-        'f:metadata':
-          'f:annotations':
-            'f:deployment.kubernetes.io/revision': {}
-        'f:status':
-          'f:availableReplicas': {}
-          'f:conditions':
-            .: {}
-            'k:{"type":"Available"}':
-              .: {}
-              'f:lastTransitionTime': {}
-              'f:lastUpdateTime': {}
-              'f:message': {}
-              'f:reason': {}
-              'f:status': {}
-              'f:type': {}
-            'k:{"type":"Progressing"}':
-              .: {}
-              'f:lastTransitionTime': {}
-              'f:lastUpdateTime': {}
-              'f:message': {}
-              'f:reason': {}
-              'f:status': {}
-              'f:type': {}
-          'f:observedGeneration': {}
-          'f:readyReplicas': {}
-          'f:replicas': {}
-          'f:updatedReplicas': {}
-  namespace: fiap
+  name: postgresfblog
+  namespace: fblog
   labels:
-    app: blog-django-py
-    app.kubernetes.io/component: blog-django-py
-    app.kubernetes.io/instance: blog-django-py
-    app.kubernetes.io/name: python
-    app.kubernetes.io/part-of: blog-app
-    app.openshift.io/runtime: python
-    app.openshift.io/runtime-version: 3.8-ubi7
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: blog-django-py
-  template:
-    metadata:
-      creationTimestamp: null
-      labels:
-        app: blog-django-py
-        deploymentconfig: blog-django-py
-    spec:
-      containers:
-        - name: blog-django-py
-          image: >-
-            image-registry.openshift-image-registry.svc:5000/fiap/blog-django-py@sha256:a8f9addbe951f01e108d6056ff882f474425b5015f4c190a49ca8e798aba2c1c
-          ports:
-            - containerPort: 8080
-              protocol: TCP
-          resources: {}
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
-          imagePullPolicy: Always
-      restartPolicy: Always
-      terminationGracePeriodSeconds: 30
-      dnsPolicy: ClusterFirst
-      securityContext: {}
-      schedulerName: default-scheduler
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 25%
-      maxSurge: 25%
-  revisionHistoryLimit: 10
-  progressDeadlineSeconds: 600
-status:
-  observedGeneration: 2
-  replicas: 1
-  updatedReplicas: 1
-  readyReplicas: 1
-  availableReplicas: 1
-  conditions:
-    - type: Available
-      status: 'True'
-      lastUpdateTime: '2021-12-10T00:59:07Z'
-      lastTransitionTime: '2021-12-10T00:59:07Z'
-      reason: MinimumReplicasAvailable
-      message: Deployment has minimum availability.
-    - type: Progressing
-      status: 'True'
-      lastUpdateTime: '2021-12-10T00:59:07Z'
-      lastTransitionTime: '2021-12-10T00:57:45Z'
-      reason: NewReplicaSetAvailable
-      message: ReplicaSet "blog-django-py-848cdb895b" has successfully progressed.
+    app: postgresfblog
+    app.kubernetes.io/component: postgresfblog
+    app.kubernetes.io/instance: postgresfblog
+    template: postgresql-persistent-template
+stringData:
+  database-name: sampledb
+  database-password: sampledb
+  database-user: sampledb
+type: Opaque
 ---
 kind: DeploymentConfig
 apiVersion: apps.openshift.io/v1
 metadata:
-  annotations:
-    openshift.io/generated-by: OpenShiftNewApp
-    template.alpha.openshift.io/wait-for-ready: 'true'
-  selfLink: >-
-    /apis/apps.openshift.io/v1/namespaces/fiap/deploymentconfigs/sample-database
-  resourceVersion: '37545745'
-  name: sample-database
-  uid: dd9fd604-e68e-45e0-a626-b55ec599e038
-  creationTimestamp: '2021-11-26T00:57:13Z'
+  name: postgresfblog
   generation: 2
-  managedFields:
-    - manager: oc
-      operation: Update
-      apiVersion: apps.openshift.io/v1
-      time: '2021-11-26T00:57:13Z'
-      fieldsType: FieldsV1
-      fieldsV1:
-        'f:metadata':
-          'f:annotations':
-            .: {}
-            'f:openshift.io/generated-by': {}
-            'f:template.alpha.openshift.io/wait-for-ready': {}
-          'f:labels':
-            .: {}
-            'f:app': {}
-            'f:app.kubernetes.io/component': {}
-            'f:app.kubernetes.io/instance': {}
-            'f:template': {}
-        'f:spec':
-          'f:replicas': {}
-          'f:selector':
-            .: {}
-            'f:name': {}
-          'f:strategy':
-            'f:activeDeadlineSeconds': {}
-            'f:recreateParams':
-              .: {}
-              'f:timeoutSeconds': {}
-            'f:type': {}
-          'f:template':
-            .: {}
-            'f:metadata':
-              .: {}
-              'f:annotations':
-                .: {}
-                'f:openshift.io/generated-by': {}
-              'f:creationTimestamp': {}
-              'f:labels':
-                .: {}
-                'f:name': {}
-            'f:spec':
-              .: {}
-              'f:containers':
-                .: {}
-                'k:{"name":"postgresql"}':
-                  'f:volumeMounts':
-                    .: {}
-                    'k:{"mountPath":"/var/lib/pgsql/data"}':
-                      .: {}
-                      'f:mountPath': {}
-                      'f:name': {}
-                  'f:terminationMessagePolicy': {}
-                  .: {}
-                  'f:resources':
-                    .: {}
-                    'f:limits':
-                      .: {}
-                      'f:memory': {}
-                  'f:livenessProbe':
-                    .: {}
-                    'f:exec':
-                      .: {}
-                      'f:command': {}
-                    'f:failureThreshold': {}
-                    'f:initialDelaySeconds': {}
-                    'f:periodSeconds': {}
-                    'f:successThreshold': {}
-                    'f:timeoutSeconds': {}
-                  'f:env':
-                    .: {}
-                    'k:{"name":"POSTGRESQL_DATABASE"}':
-                      .: {}
-                      'f:name': {}
-                      'f:valueFrom':
-                        .: {}
-                        'f:secretKeyRef':
-                          .: {}
-                          'f:key': {}
-                          'f:name': {}
-                    'k:{"name":"POSTGRESQL_PASSWORD"}':
-                      .: {}
-                      'f:name': {}
-                      'f:valueFrom':
-                        .: {}
-                        'f:secretKeyRef':
-                          .: {}
-                          'f:key': {}
-                          'f:name': {}
-                    'k:{"name":"POSTGRESQL_USER"}':
-                      .: {}
-                      'f:name': {}
-                      'f:valueFrom':
-                        .: {}
-                        'f:secretKeyRef':
-                          .: {}
-                          'f:key': {}
-                          'f:name': {}
-                  'f:readinessProbe':
-                    .: {}
-                    'f:exec':
-                      .: {}
-                      'f:command': {}
-                    'f:failureThreshold': {}
-                    'f:initialDelaySeconds': {}
-                    'f:periodSeconds': {}
-                    'f:successThreshold': {}
-                    'f:timeoutSeconds': {}
-                  'f:securityContext':
-                    .: {}
-                    'f:capabilities': {}
-                    'f:privileged': {}
-                  'f:terminationMessagePath': {}
-                  'f:imagePullPolicy': {}
-                  'f:ports':
-                    .: {}
-                    'k:{"containerPort":5432,"protocol":"TCP"}':
-                      .: {}
-                      'f:containerPort': {}
-                      'f:protocol': {}
-                  'f:name': {}
-              'f:dnsPolicy': {}
-              'f:restartPolicy': {}
-              'f:schedulerName': {}
-              'f:securityContext': {}
-              'f:terminationGracePeriodSeconds': {}
-              'f:volumes':
-                .: {}
-                'k:{"name":"sample-database-data"}':
-                  .: {}
-                  'f:name': {}
-                  'f:persistentVolumeClaim':
-                    .: {}
-                    'f:claimName': {}
-    - manager: openshift-controller-manager
-      operation: Update
-      apiVersion: apps.openshift.io/v1
-      time: '2021-11-26T00:58:03Z'
-      fieldsType: FieldsV1
-      fieldsV1:
-        'f:spec':
-          'f:template':
-            'f:spec':
-              'f:containers':
-                'k:{"name":"postgresql"}':
-                  'f:image': {}
-          'f:triggers': {}
-        'f:status':
-          'f:updatedReplicas': {}
-          'f:readyReplicas': {}
-          'f:conditions':
-            .: {}
-            'k:{"type":"Available"}':
-              .: {}
-              'f:lastTransitionTime': {}
-              'f:lastUpdateTime': {}
-              'f:message': {}
-              'f:status': {}
-              'f:type': {}
-            'k:{"type":"Progressing"}':
-              .: {}
-              'f:lastTransitionTime': {}
-              'f:lastUpdateTime': {}
-              'f:message': {}
-              'f:reason': {}
-              'f:status': {}
-              'f:type': {}
-          'f:details':
-            .: {}
-            'f:causes': {}
-            'f:message': {}
-          'f:replicas': {}
-          'f:availableReplicas': {}
-          'f:observedGeneration': {}
-          'f:unavailableReplicas': {}
-          'f:latestVersion': {}
-  namespace: fiap
   labels:
-    app: sample-database
-    app.kubernetes.io/component: sample-database
-    app.kubernetes.io/instance: sample-database
     template: postgresql-persistent-template
+    app.kubernetes.io/name: postgresql
+    app.kubernetes.io/part-of: blog-app
 spec:
   strategy:
     type: Recreate
@@ -400,25 +41,23 @@ spec:
           namespace: openshift
           name: 'postgresql:10-el8'
         lastTriggeredImage: >-
-          image-registry.openshift-image-registry.svc:5000/openshift/postgresql@sha256:6d97b69c1dd606d5ca679bbae3d6e6a8073bb1c561fa8b0d78e37f0bcac84237
+          image-registry.openshift-image-registry.svc:5000/openshift/postgresql@sha256:e8fc39b8d1fbdc230a3f04486dafcb7d7736d1f6bd51b0906bb924953e53c550
     - type: ConfigChange
   replicas: 1
   revisionHistoryLimit: 10
   test: false
   selector:
-    name: sample-database
+    name: postgresfblog
   template:
     metadata:
       creationTimestamp: null
       labels:
-        name: sample-database
-      annotations:
-        openshift.io/generated-by: OpenShiftNewApp
+        name: postgresfblog
     spec:
       volumes:
-        - name: sample-database-data
+        - name: postgresfblog-data
           persistentVolumeClaim:
-            claimName: sample-database
+            claimName: postgresfblog
       containers:
         - resources:
             limits:
@@ -448,17 +87,17 @@ spec:
             - name: POSTGRESQL_USER
               valueFrom:
                 secretKeyRef:
-                  name: sample-database
+                  name: postgresfblog
                   key: database-user
             - name: POSTGRESQL_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: sample-database
+                  name: postgresfblog
                   key: database-password
             - name: POSTGRESQL_DATABASE
               valueFrom:
                 secretKeyRef:
-                  name: sample-database
+                  name: postgresfblog
                   key: database-name
           securityContext:
             capabilities: {}
@@ -468,46 +107,133 @@ spec:
               protocol: TCP
           imagePullPolicy: IfNotPresent
           volumeMounts:
-            - name: sample-database-data
+            - name: postgresfblog-data
               mountPath: /var/lib/pgsql/data
           terminationMessagePolicy: File
           image: >-
-            image-registry.openshift-image-registry.svc:5000/openshift/postgresql@sha256:6d97b69c1dd606d5ca679bbae3d6e6a8073bb1c561fa8b0d78e37f0bcac84237
+            image-registry.openshift-image-registry.svc:5000/openshift/postgresql@sha256:e8fc39b8d1fbdc230a3f04486dafcb7d7736d1f6bd51b0906bb924953e53c550
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
       securityContext: {}
       schedulerName: default-scheduler
-status:
-  observedGeneration: 2
-  details:
-    message: config change
-    causes:
-      - type: ConfigChange
-  availableReplicas: 1
-  unavailableReplicas: 0
-  latestVersion: 1
-  updatedReplicas: 1
-  conditions:
-    - type: Available
-      status: 'True'
-      lastUpdateTime: '2021-11-26T00:58:03Z'
-      lastTransitionTime: '2021-11-26T00:58:03Z'
-      message: Deployment config has minimum availability.
-    - type: Progressing
-      status: 'True'
-      lastUpdateTime: '2021-11-26T00:58:03Z'
-      lastTransitionTime: '2021-11-26T00:58:03Z'
-      reason: NewReplicationControllerAvailable
-      message: replication controller "sample-database-1" successfully rolled out
   replicas: 1
   readyReplicas: 1
 ---
-﻿apiVersion: autoscaling/v2beta2
+kind: Service
+apiVersion: v1
+metadata:
+  name: postgresfblog
+  labels:
+    app: django-psql-persistent
+    template: django-psql-persistent
+spec:
+  ports:
+    - name: postgresql
+      protocol: TCP
+      port: 5432
+      targetPort: 5432
+  selector:
+    name: postgresfblog
+  type: ClusterIP
+  sessionAffinity: None
+status:
+  loadBalancer: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fiap-blog-app
+  labels:    
+    app: blog-django-py-git
+    app.kubernetes.io/component: blog-django-py-git
+    app.kubernetes.io/instance: blog-django-py-git
+    app.kubernetes.io/name: python
+    app.kubernetes.io/part-of: blog-app
+    app.openshift.io/runtime: python
+    app.openshift.io/runtime-version: 3.8-ubi7	
+spec:
+  selector:
+    matchLabels:
+      app: fiap-blog-app
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: fiap-blog-app
+        deploymentconfig: blog-django-py-git
+    spec:
+      containers:
+        - name: fiap-blog-app
+          image: 'openshiftkatacoda/blog-django-py:latest'
+          imagePullPolicy: Always
+          terminationMessagePath: /dev/termination-log
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: DATABASE_URL
+              value: 'postgresql://sampledb:sampledb@postgresfblog:5432/sampledb'  
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: fiap-blog-app
+  labels:
+    app: fiap-blog-app
+    app.kubernetes.io/component: fiap-blog-app
+    app.kubernetes.io/instance: fiap-blog-app
+    app.kubernetes.io/name: python
+    app.kubernetes.io/part-of: blog-app
+    app.openshift.io/runtime: python
+    app.openshift.io/runtime-version: 3.8-ubi7
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: fiap-blog-app
+  type: ClusterIP
+  sessionAffinity: None
+status:
+  loadBalancer: {}              
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: fiap-blog-app
+  labels:
+    app: fiap-blog-app
+    app.kubernetes.io/component: fiap-blog-app
+    app.kubernetes.io/instance: fiap-blog-app
+    app.kubernetes.io/name: python
+    app.kubernetes.io/part-of: blog-app
+    app.openshift.io/runtime: python
+    app.openshift.io/runtime-version: 3.8-ubi7
+spec:
+  host: fiap-blog-app.apps.na46.prod.nextcle.com
+  to:
+    kind: Service
+    name: fiap-blog-app
+    weight: 100
+  port:
+    targetPort: 8080-tcp
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: fiap-blog-app.apps.na46.prod.nextcle.com
+      routerName: default
+      wildcardPolicy: None
+      routerCanonicalHostname: apps.na46.prod.nextcle.com  
+---
+apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: hpa-fiap
-  namespace: fiap
+  name: hpa-fblog
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
