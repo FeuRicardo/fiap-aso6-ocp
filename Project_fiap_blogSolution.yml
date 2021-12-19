@@ -2,7 +2,6 @@ kind: Secret
 apiVersion: v1
 metadata:
   name: postgresfblog
-  namespace: fblog
   labels:
     app: postgresfblog
     app.kubernetes.io/component: postgresfblog
@@ -238,7 +237,7 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: blog-django-py-git
+    name: fiap-blog-app
   minReplicas: 1
   maxReplicas: 5
   metrics:
