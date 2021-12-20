@@ -2,14 +2,19 @@
 
 - **File name:** Project_fiap_blogSolution.yml
 - **Project name:** fiap-blog-app
-- **Kind Objects:** 
+- **The following resources will be created:** 
   - Secret
     - database-user
     - database-password
     - database-name
-  - DeploymentConfig
-    - postgresfblog: Postgresql database
+    - database-url      
+  - ConfigMaps
+    - blog.site.name
+    - blog.site.color
+  - PersistentVolumeClaim
+    - postgresfblog-pvc
   - Deployment
+    - postgresfblog: Postgresql database
     - fiap-blog-app: blog-django-py-git
   - Service
     - postgresfblog
