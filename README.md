@@ -14,8 +14,8 @@
   - PersistentVolumeClaim
     - postgresfblog-pvc
   - Deployment
-    - postgresfblog: Postgresql database
-    - fiap-blog-app: blog-django-py-git
+    - postgresfblog
+    - fiap-blog-app
   - Service
     - postgresfblog
     - fiap-blog-app
