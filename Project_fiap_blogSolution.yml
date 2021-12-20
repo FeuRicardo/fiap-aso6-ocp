@@ -226,7 +226,7 @@ status:
       wildcardPolicy: None
       routerCanonicalHostname: apps.na46.prod.nextcle.com  
 ---
-﻿apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   name: hpa-fblog
@@ -234,8 +234,8 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: blog-django-py-git
-  minReplicas: 1
+    name: fiap-blog-app
+  minReplicas: 2
   maxReplicas: 5
   metrics:
     - type: Resource
