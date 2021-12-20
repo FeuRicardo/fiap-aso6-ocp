@@ -3,7 +3,6 @@ kind: Secret
 apiVersion: v1
 metadata:
   name: postgresfblog
-  namespace: fblog
   labels:
     app: postgresfblog
     app.kubernetes.io/component: postgresfblog
